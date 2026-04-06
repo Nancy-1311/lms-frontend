@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const TutorDashboard = () => {
-  const [tutor, setTutor] = useState(null); //  only ONE tutor
+  const [tutor, setTutor] = useState(null); 
   const [newSlot, setNewSlot] = useState("");
 
   const token = localStorage.getItem("token");

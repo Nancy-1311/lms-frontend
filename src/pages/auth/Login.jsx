@@ -5,7 +5,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // ✅ Prevent logged-in user from seeing login page
+  // Prevent logged-in user from seeing login page
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
 
@@ -20,7 +20,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      // 🔥 VERY IMPORTANT: clear old data
+      
       localStorage.clear();
 
       const res = await axios.post(
@@ -31,7 +31,7 @@ const Login = () => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      // ✅ ROLE-BASED REDIRECT
+    
       if (res.data.user.role === "tutor") {
         window.location.href = "/tutor";
       } else {

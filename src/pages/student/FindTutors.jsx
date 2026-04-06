@@ -14,14 +14,14 @@ const FindTutors = () => {
 
   const [selectedTutor, setSelectedTutor] = useState(null);
 
-  // ✅ NEW: store reviews
+  // NEW: store reviews
   const [reviewsMap, setReviewsMap] = useState({});
 
   useEffect(() => {
     fetchTutors();
   }, []);
 
-  // ✅ FETCH REVIEWS
+  // FETCH REVIEWS
   const getReviewsByTutor = async (tutorId) => {
     const res = await fetch(`http://localhost:5000/api/reviews/${tutorId}`);
     return res.json();
@@ -32,7 +32,7 @@ const FindTutors = () => {
       const data = await getTutors();
       setTutors(data);
 
-      // ✅ FETCH REVIEWS FOR EACH TUTOR
+      // FETCH REVIEWS FOR EACH TUTOR
       const reviewData = {};
 
       for (let tutor of data) {
