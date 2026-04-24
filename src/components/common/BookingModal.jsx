@@ -29,7 +29,7 @@ const handlePayment = async () => {
 
     // CREATE BOOKING FIRST
     const bookingRes = await axios.post(
-      "http://localhost:5000/api/bookings",
+      "https://lms-backend-2r7y.onrender.com/api/bookings",
       {
         tutorId: tutor._id,
         // student: user._id,
@@ -50,7 +50,7 @@ const handlePayment = async () => {
 
     // CREATE PAYMENT SESSION
     const paymentRes = await axios.post(
-      "http://localhost:5000/api/payment/create-checkout-session",
+      "https://lms-backend-2r7y.onrender.com/api/payment/create-checkout-session",
       {
         name: tutor.name,
         price: tutor.price,

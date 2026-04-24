@@ -15,7 +15,7 @@ const PaymentHistory = () => {
   const fetchPayments = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/payment/my-payments",
+        "https://lms-backend-2r7y.onrender.com/api/payment/my-payments",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

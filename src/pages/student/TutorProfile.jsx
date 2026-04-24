@@ -21,7 +21,7 @@ const TutorProfile = () => {
   const fetchTutor = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/tutors"
+        "https://lms-backend-2r7y.onrender.com/api/tutors"
       );
 
       const found = res.data.find((t) => t._id === id);
@@ -36,7 +36,7 @@ const TutorProfile = () => {
   const fetchReviews = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/reviews/${id}`
+        `https://lms-backend-2r7y.onrender.com/api/reviews/${id}`
       );
       setReviews(res.data);
     } catch (err) {

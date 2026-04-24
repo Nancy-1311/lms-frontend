@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:5000/api/bookings";
+const API = "https://lms-backend-2r7y.onrender.com/api/bookings";
 
 export const createBooking = async (data) => {
   const res = await axios.post(API, data);

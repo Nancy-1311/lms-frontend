@@ -7,7 +7,6 @@ const Success = () => {
   const hasRun = useRef(false);
 
   useEffect(() => {
-    // ✅ Prevent double execution
     if (hasRun.current) return;
     hasRun.current = true;
 
@@ -16,8 +15,7 @@ const Success = () => {
         const params = new URLSearchParams(window.location.search);
 
         const bookingId = params.get("bookingId");
-        // const price = params.get("price");
-        const session_id = params.get("session_id"); // ✅ ADD THIS
+        const session_id = params.get("session_id");
 
         if (!bookingId) {
           console.error("❌ No bookingId found");
@@ -25,7 +23,7 @@ const Success = () => {
         }
 
         await axios.post(
-          "http://localhost:5000/api/payment/confirm",
+          "https://lms-backend-2r7y.onrender.com/api/payment/confirm",
           { bookingId, session_id},
           {
             headers: {
@@ -40,7 +38,6 @@ const Success = () => {
         console.error("❌ Confirm error:", err);
       }
 
-      // ✅ Redirect after success
         setTimeout(() => {
           navigate("/lessons");
         }, 2000);

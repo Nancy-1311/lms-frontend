@@ -20,7 +20,7 @@ const MyLessons = () => {
   const fetchBookings = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/bookings",
+        "https://lms-backend-2r7y.onrender.com/api/bookings",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -38,7 +38,7 @@ const MyLessons = () => {
   const saveRecording = async (id) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/bookings/${id}/recording`,
+        `https://lms-backend-2r7y.onrender.com/api/bookings/${id}/recording`,
         { recordingUrl: recordingLinks[id] },
         {
           headers: {
@@ -63,7 +63,7 @@ const MyLessons = () => {
 
   const cancelBooking = async (id) => {
     await axios.delete(
-      `http://localhost:5000/api/bookings/${id}`,
+      `https://lms-backend-2r7y.onrender.com/api/bookings/${id}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -81,7 +81,7 @@ const MyLessons = () => {
       }
 
       await axios.put(
-        `http://localhost:5000/api/bookings/${id}/reschedule`,
+        `https://lms-backend-2r7y.onrender.com/api/bookings/${id}/reschedule`,
         { newTime: newTimes[id] },
         {
           headers: {
@@ -128,7 +128,7 @@ const MyLessons = () => {
       }
 
       await axios.post(
-        "http://localhost:5000/api/reviews",
+        "https://lms-backend-2r7y.onrender.com/api/reviews",
         {
           tutorId,
           rating,
@@ -160,7 +160,7 @@ const MyLessons = () => {
   const saveMeetingLink = async (id, link) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/bookings/${id}/meeting-link`,
+        `https://lms-backend-2r7y.onrender.com/api/bookings/${id}/meeting-link`,
         { meetingLink: link },
         {
           headers: {
@@ -206,7 +206,6 @@ classDateTime.setMinutes(parseInt(minutes));
                 {new Date(b.date).toLocaleDateString()} | {b.time}
               </p>
 
-              {/* ✅ NEW SMART ACTION SECTION */}
               <div className="mt-3 space-y-2">
 
                 {/* COMPLETED MESSAGE */}
@@ -234,7 +233,6 @@ classDateTime.setMinutes(parseInt(minutes));
                       Cancel Booking ❌
                     </button>
 
-                    {/* RESCHEDULE (STUDENT ONLY) */}
                     {user?.role === "student" && (
                       <>
                         <select

@@ -32,7 +32,7 @@ const FindTutors = () => {
 const deleteTutor = async (id) => {
   try {
     await axios.delete(
-      `http://localhost:5000/api/tutors/${id}`,
+      `https://lms-backend-2r7y.onrender.com/api/tutors/${id}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -51,20 +51,6 @@ const deleteTutor = async (id) => {
     alert("Only Admin can delete the tutor ❌");
   }
 };
-
-  // const filteredTutors = tutors.filter((tutor) => {
-  //   return (
-  //     tutor.name?.toLowerCase().includes(search.toLowerCase()) &&
-  //     (subject === "" ||
-  //       tutor.subject?.toLowerCase() === subject.toLowerCase()) &&
-  //     (minRating === "" || tutor.rating >= Number(minRating)) &&
-  //     (maxPrice === "" || tutor.price <= Number(maxPrice)) &&
-  //     (availability === "" ||
-  //       tutor.availability?.some((slot) =>
-  //         slot.toLowerCase().includes(availability.toLowerCase())
-  //       ))
-  //   );
-  // });
 
   const filteredTutors = tutors.filter((tutor) => {
   return (

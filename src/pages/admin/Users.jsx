@@ -9,7 +9,7 @@ const Users = () => {
   const fetchUsers = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/admin/users",
+        "https://lms-backend-2r7y.onrender.com/api/admin/users",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -31,7 +31,7 @@ const Users = () => {
   const deleteUser = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/admin/users/${id}`,
+        `https://lms-backend-2r7y.onrender.com/api/admin/users/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -48,7 +48,7 @@ const Users = () => {
   const toggleStatus = async (id) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/admin/users/${id}/toggle`,
+        `https://lms-backend-2r7y.onrender.com/api/admin/users/${id}/toggle`,
         {},
         {
           headers: {
@@ -66,7 +66,7 @@ const Users = () => {
   const approveTutor = async (id) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/admin/tutors/${id}/approve`,
+        `https://lms-backend-2r7y.onrender.com/api/admin/tutors/${id}/approve`,
         {},
         {
           headers: {
@@ -84,7 +84,7 @@ const Users = () => {
   const rejectTutor = async (id) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/admin/tutors/${id}/reject`,
+        `https://lms-backend-2r7y.onrender.com/api/admin/tutors/${id}/reject`,
         {},
         {
           headers: {

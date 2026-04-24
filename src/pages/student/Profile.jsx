@@ -24,7 +24,7 @@ const Profile = () => {
 const handlePasswordChange = async () => {
   try {
     await axios.put(
-      "http://localhost:5000/api/auth/change-password",
+      "https://lms-backend-2r7y.onrender.com/api/auth/change-password",
       passwords,
       {
         headers: {
@@ -57,7 +57,7 @@ const startEditing = () => {
 
   const fetchProfile = async () => {
     const res = await axios.get(
-      "http://localhost:5000/api/auth/me",
+      "https://lms-backend-2r7y.onrender.com/api/auth/me",
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -72,7 +72,7 @@ const startEditing = () => {
   const handleSave = async () => {
   try {
     await axios.put(
-      "http://localhost:5000/api/auth/me",
+      "https://lms-backend-2r7y.onrender.com/api/auth/me",
       {
         name: user.name,
         profilePic: user.profilePic,

@@ -10,14 +10,14 @@ const MyBookings = () => {
   }, []);
 
   const fetchBookings = async () => {
-    const res = await axios.get("http://localhost:5000/api/bookings");
+    const res = await axios.get("https://lms-backend-2r7y.onrender.com/api/bookings");
     setBookings(res.data);
   };
 
   const reschedule = async (id) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/bookings/${id}/reschedule`,
+        `https://lms-backend-2r7y.onrender.com/api/bookings/${id}/reschedule`,
         { newTime }
       );
 
@@ -29,13 +29,10 @@ const MyBookings = () => {
     }
   };
 
-  // ✅ NEW: join class
   const joinClass = (booking) => {
     alert("Joining class...");
-    // you can replace this later with real meeting link
   };
 
-  // ✅ NEW: watch recording
   const watchRecording = async (url) => {
     window.open(url);
   };
@@ -58,7 +55,6 @@ const MyBookings = () => {
             <p>Tutor: {b.tutorName}</p>
             <p>Time: {b.time}</p>
 
-            {/* ✅ NEW: Join / Recording logic */}
             <div className="mt-2">
               {!b.recordingUrl ? (
                 <button

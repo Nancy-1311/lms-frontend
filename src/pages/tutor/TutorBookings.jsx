@@ -12,7 +12,7 @@ const TutorBookings = () => {
   const fetchBookings = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/bookings",
+        "https://lms-backend-2r7y.onrender.com/api/bookings",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -43,7 +43,7 @@ const TutorBookings = () => {
   const cancelBooking = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/bookings/${id}`,
+        `https://lms-backend-2r7y.onrender.com/api/bookings/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -65,7 +65,7 @@ const TutorBookings = () => {
       }
 
       await axios.put(
-        `http://localhost:5000/api/bookings/${id}/meeting-link`,
+        `https://lms-backend-2r7y.onrender.com/api/bookings/${id}/meeting-link`,
         { meetingLink: link },
         {
           headers: {
@@ -95,7 +95,7 @@ const TutorBookings = () => {
       }
 
       await axios.put(
-        `http://localhost:5000/api/bookings/${id}/recording`,
+        `https://lms-backend-2r7y.onrender.com/api/bookings/${id}/recording`,
         { recordingUrl: link },
         {
           headers: {

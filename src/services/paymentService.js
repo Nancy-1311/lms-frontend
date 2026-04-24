@@ -3,7 +3,7 @@ import axios from "axios";
 export const startPayment = async (data) => {
   try{
   const res = await axios.post(
-    "http://localhost:5000/api/payment/checkout",
+    "https://lms-backend-2r7y.onrender.com/api/payment/checkout",
     {
       name: data.name,
       price: data.price,

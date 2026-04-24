@@ -13,7 +13,7 @@ const VideoRoom = () => {
   const checkAccess = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/bookings",
+        "https://lms-backend-2r7y.onrender.com/api/bookings",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

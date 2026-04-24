@@ -11,7 +11,7 @@ const Earnings = () => {
   const fetchEarnings = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/tutors/earnings",
+        "https://lms-backend-2r7y.onrender.com/api/tutors/earnings",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

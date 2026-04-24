@@ -39,7 +39,7 @@ const Login = () => {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://lms-backend-2r7y.onrender.com/api/auth/login",
         { email, password }
       );
 

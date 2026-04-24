@@ -29,11 +29,11 @@ const AdminDashboard = () => {
 
   const token = localStorage.getItem("token");
 
-  // 🔹 FETCH STATS
+  //FETCH STATS
   const fetchStats = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/admin/dashboard",
+        "https://lms-backend-2r7y.onrender.com/api/admin/dashboard",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -47,11 +47,11 @@ const AdminDashboard = () => {
     }
   };
 
-  // 🔹 FETCH ANALYTICS (NEW)
+  //FETCH ANALYTICS (NEW)
   const fetchAnalytics = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/admin/analytics",
+        "https://lms-backend-2r7y.onrender.com/api/admin/analytics",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ const AdminDashboard = () => {
   const fetchTopTutors = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/admin/top-tutors",
+        "https://lms-backend-2r7y.onrender.com/api/admin/top-tutors",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -93,11 +93,8 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      {/* <h2 className="text-3xl font-bold mb-8 dark:text-white">
-        Admin Dashboard 📊
-      </h2> */}
 
-      {/* 🔹 STATS CARDS */}
+      {/* STATS CARDS */}
       <div className="grid grid-cols-4 gap-6 mb-10">
 
         <div className="p-6 rounded-2xl bg-gradient-to-r from-blue-500/20 shadow">
@@ -122,10 +119,10 @@ const AdminDashboard = () => {
 
       </div>
 
-      {/* 🔹 CHARTS */}
+      {/*CHARTS */}
       <div className="grid grid-cols-2 gap-8">
 
-        {/* 📈 REVENUE CHART */}
+        {/*REVENUE CHART */}
         <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow">
           <h3 className="mb-4 font-semibold dark:text-white">Monthly Revenue</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -139,7 +136,7 @@ const AdminDashboard = () => {
           </ResponsiveContainer>
         </div>
 
-        {/* 📊 BOOKINGS CHART */}
+        {/* BOOKINGS CHART */}
         <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow">
           <h3 className="mb-4 font-semibold dark:text-white">Monthly Bookings</h3>
           <ResponsiveContainer width="100%" height={300}>

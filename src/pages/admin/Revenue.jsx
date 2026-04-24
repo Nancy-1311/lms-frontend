@@ -12,7 +12,7 @@ const Revenue = () => {
   const fetchRevenue = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/admin/dashboard",
+        "https://lms-backend-2r7y.onrender.com/api/admin/dashboard",
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -30,7 +30,7 @@ const Register = () => {
       setLoading(true);
 
       await axios.post(
-        "http://localhost:5000/api/auth/register",
+        "https://lms-backend-2r7y.onrender.com/api/auth/register",
         form
       );
 
@@ -116,7 +116,6 @@ const Register = () => {
           </button>
         </form>
 
-        {/* DEMO SECTION */}
         <div className="w-[350px] p-6 rounded-2xl 
         bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 
         text-white shadow-xl">

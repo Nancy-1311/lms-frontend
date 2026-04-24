@@ -6,7 +6,6 @@ const Sidebar = () => {
   const storedUser = localStorage.getItem("user");
   const user = storedUser ? JSON.parse(storedUser) : null;
 
-  // ❌ BLOCK ADMIN COMPLETELY
   if (user?.role === "admin") return null;
 
   // BASE MENU
@@ -15,7 +14,7 @@ const Sidebar = () => {
     { name: "Profile", path: "/profile" },
   ];
 
-  // ✅ STUDENT MENU
+  //STUDENT MENU
   if (user?.role === "student") {
     menu = [
       ...menu,
@@ -25,7 +24,7 @@ const Sidebar = () => {
     ];
   }
 
-  // ✅ TUTOR MENU
+  // TUTOR MENU
   if (user?.role === "tutor") {
     menu = [
       ...menu,

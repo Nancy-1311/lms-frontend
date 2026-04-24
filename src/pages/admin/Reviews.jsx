@@ -8,7 +8,7 @@ const Reviews = () => {
   const fetchReviews = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/admin/reviews",
+        "https://lms-backend-2r7y.onrender.com/api/admin/reviews",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -24,12 +24,12 @@ const Reviews = () => {
 
   useEffect(() => {
     fetchReviews();
-  }, [token]); // ✅ added dependency safety
+  }, [token]); 
 
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/admin/reviews/${id}`,
+        `https://lms-backend-2r7y.onrender.com/api/admin/reviews/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -60,10 +60,8 @@ const Reviews = () => {
               bg-white dark:bg-gray-900 
               border-gray-200 dark:border-gray-700"
             >
-              {/* ✅ SAFE FIELD ACCESS */}
               <p className="font-semibold dark:text-white">
                 Tutor Name : { " "}
-                {/* {r.student?.name || "Unknown Student"} →{" "} */}
                 {r.tutorId?.userId?.name || "Unknown Tutor"}
               </p>
 

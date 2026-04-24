@@ -12,7 +12,7 @@ const MainLayout = () => {
         <Navbar />
 
         <div className="p-6">
-          <Outlet />   {/* 🔥 THIS IS THE FIX */}
+          <Outlet />   
         </div>
       </div>
 

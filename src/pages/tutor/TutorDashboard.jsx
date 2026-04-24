@@ -17,7 +17,7 @@ const TutorDashboard = () => {
   // FETCH TUTOR PROFILE
   const fetchTutor = async () => {
     const res = await axios.get(
-      "http://localhost:5000/api/tutors/me",
+      "https://lms-backend-2r7y.onrender.com/api/tutors/me",
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -28,7 +28,7 @@ const TutorDashboard = () => {
   // FETCH DASHBOARD
   const fetchDashboard = async () => {
     const res = await axios.get(
-      "http://localhost:5000/api/tutors/dashboard",
+      "https://lms-backend-2r7y.onrender.com/api/tutors/dashboard",
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -53,7 +53,7 @@ const TutorDashboard = () => {
   const uploadRecording = async (id, url) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/bookings/${id}/recording`,
+        `https://lms-backend-2r7y.onrender.com/api/bookings/${id}/recording`,
         { recordingUrl: url },
         {
           headers: {
@@ -72,7 +72,7 @@ const TutorDashboard = () => {
   const updateProfile = async () => {
     try {
       await axios.put(
-        "http://localhost:5000/api/tutors/me",
+        "https://lms-backend-2r7y.onrender.com/api/tutors/me",
         tutor,
         {
           headers: {
@@ -92,7 +92,7 @@ const TutorDashboard = () => {
     const updated = [...(tutor.availability || []), newSlot];
 
     await axios.put(
-      "http://localhost:5000/api/tutors/me",
+      "https://lms-backend-2r7y.onrender.com/api/tutors/me",
       { availability: updated },
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -111,7 +111,7 @@ const TutorDashboard = () => {
   // SAVE PROFILE
   const saveProfile = async () => {
     await axios.put(
-      "http://localhost:5000/api/tutors/me",
+      "https://lms-backend-2r7y.onrender.com/api/tutors/me",
       {
         bio: tutor.bio,
         experience: tutor.experience,
@@ -129,7 +129,7 @@ const TutorDashboard = () => {
   // DELETE PROFILE
   const deleteTutor = async () => {
     await axios.delete(
-      "http://localhost:5000/api/tutors/me",
+      "https://lms-backend-2r7y.onrender.com/api/tutors/me",
       {
         headers: { Authorization: `Bearer ${token}` },
       }

@@ -6,7 +6,7 @@ const Dashboard = () => {
     total: 0,
     upcoming: 0,
     completed: 0,
-    totalSpent: 0, // ✅ ADDED
+    totalSpent: 0, 
   });
 
   useEffect(() => {
@@ -20,10 +20,10 @@ const Dashboard = () => {
   try {
     const token = localStorage.getItem("token");
 
-    // ✅ ADMIN LOGIC (ADD THIS FIRST)
+    
     if (user?.role === "admin") {
       const res = await axios.get(
-        "http://localhost:5000/api/admin/dashboard",
+        "https://lms-backend-2r7y.onrender.com/api/admin/dashboard",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -35,10 +35,10 @@ const Dashboard = () => {
       return;
     }
 
-    // ✅ TUTOR LOGIC
+
     if (user?.role === "tutor") {
       const res = await axios.get(
-        "http://localhost:5000/api/tutors/dashboard",
+        "https://lms-backend-2r7y.onrender.com/api/tutors/dashboard",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -50,9 +50,8 @@ const Dashboard = () => {
       return;
     }
 
-    // ✅ STUDENT LOGIC (same as your code)
     const res = await axios.get(
-      "http://localhost:5000/api/bookings",
+      "https://lms-backend-2r7y.onrender.com/api/bookings",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -70,9 +69,9 @@ const Dashboard = () => {
 
    bookings.forEach((b) => {
   if (b.meetingLink && b.meetingLink !== "") {
-    completed++;   // ✅ tutor has added meeting link
+    completed++; 
   } else {
-    upcoming++;    // ✅ still upcoming
+    upcoming++;    
   }
 });
 
