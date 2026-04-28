@@ -235,30 +235,48 @@ const [statusFilter, setStatusFilter] = useState("");
             </tr>
           </thead>
 
-          <tbody className="dark:text-white">
-            {users.map((user) => (
-              <tr key={user._id} className="border-b">
-                {/* NAME */}
-                <td className="p-4">{user.name}</td>
+         <tbody className="dark:text-white">
+  {users
+    .filter((user) => {
+      return (
+        user.name.toLowerCase().includes(search.toLowerCase()) ||
+        user.email.toLowerCase().includes(search.toLowerCase())
+      );
+    })
+    .filter((user) =>
+      roleFilter ? user.role === roleFilter : true
+    )
+    .filter((user) =>
+      statusFilter
+        ? statusFilter === "active"
+          ? user.isActive
+          : !user.isActive
+        : true
+    )
+    .map((user) => (
+      <tr key={user._id} className="border-b">
+        
+        {/* NAME */}
+        <td className="p-4">{user.name}</td>
 
-                {/* EMAIL */}
-                <td className="p-4">{user.email}</td>
+        {/* EMAIL */}
+        <td className="p-4">{user.email}</td>
 
-                {/* ROLE */}
-                <td className="p-4 capitalize">{user.role}</td>
+        {/* ROLE */}
+        <td className="p-4 capitalize">{user.role}</td>
 
-                {/* STATUS */}
-                <td className="p-4">
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm ${
-                      user.isActive
-                        ? "bg-green-200 text-green-800"
-                        : "bg-red-200 text-red-800"
-                    }`}
-                  >
-                    {user.isActive ? "Active" : "Blocked"}
-                  </span>
-                </td>
+        {/* STATUS */}
+        <td className="p-4">
+          <span
+            className={`px-3 py-1 rounded-full text-sm ${
+              user.isActive
+                ? "bg-green-200 text-green-800"
+                : "bg-red-200 text-red-800"
+            }`}
+          >
+            {user.isActive ? "Active" : "Blocked"}
+          </span>
+        </td>
 
                 {/* TUTOR APPROVAL */}
                 <td className="p-4">
