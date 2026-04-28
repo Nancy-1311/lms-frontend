@@ -165,6 +165,7 @@ const [statusFilter, setStatusFilter] = useState("");
     <option value="">All Roles</option>
     <option value="student">Student</option>
     <option value="tutor">Tutor</option>
+     <option value="admin">Admin</option>
   </select>
 
   <select
