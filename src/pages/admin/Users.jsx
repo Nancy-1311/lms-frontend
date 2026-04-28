@@ -130,7 +130,8 @@ const [role, setRole] = useState("student");
     fetchUsers();
 
   } catch (err) {
-    console.error(err);
+    console.log("ERROR:", err.response?.data);
+  alert(err.response?.data?.message);
 
     alert(
       err.response?.data?.message || "Failed to create user ❌"
