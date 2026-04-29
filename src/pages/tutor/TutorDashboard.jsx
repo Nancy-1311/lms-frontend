@@ -126,19 +126,44 @@ const TutorDashboard = () => {
     fetchTutor();
   };
 
-  // DELETE PROFILE
-  const deleteTutor = async () => {
-    await axios.delete(
+  // // DELETE PROFILE
+  // const deleteTutor = async () => {
+  //   await axios.delete(
+  //     "https://lms-backend-2r7y.onrender.com/api/tutors/me",
+  //     {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     }
+  //   );
+
+  //   alert("Deleted ✅");
+  //   setTutor(null);
+  // };
+
+  // 🔥 ONLY CHANGES APPLIED — REST SAME
+
+// ➕ ADD THIS FUNCTION (just below saveProfile)
+const toggleActive = async () => {
+  try {
+    await axios.put(
       "https://lms-backend-2r7y.onrender.com/api/tutors/me",
+      { isActive: !tutor.isActive },
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
 
-    alert("Deleted ✅");
-    setTutor(null);
-  };
+    alert(
+      tutor.isActive
+        ? "Profile Disabled 🟡"
+        : "Profile Enabled 🟢"
+    );
 
+    fetchTutor();
+  } catch (err) {
+    console.error(err);
+  }
+};
+  
   if (!tutor) return <p>No tutor profile found</p>;
 
   
@@ -284,12 +309,20 @@ const TutorDashboard = () => {
               Save
             </button>
 
-            <button
+            {/* <button
               onClick={deleteTutor}
               className="flex-1 py-2 bg-red-500 text-white rounded"
             >
               Delete
-            </button>
+            </button> */}
+
+            <button
+  onClick={toggleActive}
+  className="flex-1 py-2 bg-yellow-500 text-white rounded"
+>
+  {tutor.isActive ? "Disable" : "Enable"}
+</button>
+            
           </div>
         </div>
       </div>
