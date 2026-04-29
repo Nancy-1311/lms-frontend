@@ -279,8 +279,8 @@ const toggleActive = async () => {
             value={tutor.bio || ""}
             onChange={(e) =>
               updateField("bio", e.target.value)
-              disabled={!isEditing}
             }
+            disabled={!isEditing}
             className="w-full p-2 border rounded dark:bg-black"
           />
 
@@ -360,13 +360,6 @@ const toggleActive = async () => {
             >
               Delete
             </button> */}
-
-            <button
-  onClick={toggleActive}
-  className="flex-1 py-2 bg-yellow-500 text-white rounded"
->
-  {tutor.isActive ? "Disable" : "Enable"}
-</button>
             
           </div>
         </div>
