@@ -169,230 +169,226 @@ const toggleActive = async () => {
 
   
 
-  return (
-    <div>
-{dashboard && (
-  <div className="grid grid-cols-5 gap-6 mb-6">
-    
-    <div className="p-4 border rounded-xl">
-      <p>Total</p>
-      <h3 className="text-xl font-bold">
-        {dashboard.total}
-      </h3>
-    </div>
+ return (
+  <div>
 
-    <div className="p-4 border rounded-xl">
-      <p>Upcoming</p>
-      <h3 className="text-xl font-bold">
-        {dashboard.upcoming}
-      </h3>
-    </div>
-
-    <div className="p-4 border rounded-xl">
-      <p>Completed</p>
-      <h3 className="text-xl font-bold">
-        {dashboard.completed}
-      </h3>
-    </div>
-
-    <div className="p-4 border rounded-xl">
-      <p>Earnings</p>
-      <h3 className="text-xl font-bold text-green-500">
-        ₹{dashboard.totalEarnings || 0}
-      </h3>
-    </div>
-
-    <div className="p-4 border rounded-xl">
-      <p>Students</p>
-      <h3 className="text-xl font-bold">
-        {dashboard.totalStudents || 0}
-      </h3>
-    </div>
-
-  </div>
-)}
-
-      {/* PROFILE */}
-      <div className="p-5 rounded-2xl mb-6 bg-white dark:bg-gray-900 border">
-        <h3 className="text-xl font-semibold">{tutor.name}</h3>
-        <p className="text-gray-400">{tutor.subject}</p>
-
-        {/* AVAILABILITY */}
-        <div className="mt-3 flex flex-wrap gap-2">
-          {tutor.availability?.map((slot) => (
-            <span
-              key={slot}
-              className="px-3 py-1 bg-purple-500 text-white rounded"
-            >
-              {slot}
-            </span>
-          ))}
+    {dashboard && (
+      <div className="grid grid-cols-5 gap-6 mb-6">
+        <div className="p-4 border rounded-xl">
+          <p>Total</p>
+          <h3 className="text-xl font-bold">{dashboard.total}</h3>
         </div>
 
-        <div className="mt-4 flex gap-2">
-          <input
-            type="text"
-            placeholder="Add time"
-            value={newSlot}
-            onChange={(e) => setNewSlot(e.target.value)}
-            
-            className="p-2 border rounded w-full dark:bg-black"
-          />
-
-          <button
-            onClick={addSlot}
-            className="px-4 bg-green-500 text-white rounded"
-          >
-            Add
-          </button>
+        <div className="p-4 border rounded-xl">
+          <p>Upcoming</p>
+          <h3 className="text-xl font-bold">{dashboard.upcoming}</h3>
         </div>
 
-        {/* PRICE */}
-        <div className="mt-4">
-          <label className="block text-sm mb-1">
-            Price per hour (₹)
-          </label>
-
-          <input
-            type="number"
-            value={tutor.price || ""}
-            onChange={(e) =>
-              setTutor({ ...tutor, price: e.target.value })
-            }
-            className="w-full p-2 border rounded 
-            dark:bg-gray-800 dark:text-white"
-          />
-
-          <button
-            onClick={updateProfile}
-            className="mt-2 w-full py-2 bg-green-500 text-white rounded"
-          >
-            Update Price 💰
-          </button>
+        <div className="p-4 border rounded-xl">
+          <p>Completed</p>
+          <h3 className="text-xl font-bold">{dashboard.completed}</h3>
         </div>
 
-        {/* PROFILE EDIT */}
-        <div className="mt-4 space-y-2">
-          <input
-            type="text"
-            placeholder="Bio"
-            value={tutor.bio || ""}
-            onChange={(e) =>
-              updateField("bio", e.target.value)
-            }
-            disabled={!isEditing}
-            className="w-full p-2 border rounded dark:bg-black"
-          />
+        <div className="p-4 border rounded-xl">
+          <p>Earnings</p>
+          <h3 className="text-xl font-bold text-green-500">
+            ₹{dashboard.totalEarnings || 0}
+          </h3>
+        </div>
 
-          <input
-            type="text"
-            placeholder="Experience"
-            value={tutor.experience || ""}
-            onChange={(e) =>
-              updateField("experience", e.target.value)
-            }
-            className="w-full p-2 border rounded dark:bg-black"
-          />
-
-          <input
-            type="text"
-            placeholder="Expertise"
-            value={tutor.expertise || ""}
-            onChange={(e) =>
-              updateField("expertise", e.target.value)
-            }
-            className="w-full p-2 border rounded dark:bg-black"
-          />
-
-          <div className="flex gap-2">
-            {/* <button
-              onClick={saveProfile}
-              className="flex-1 py-2 bg-blue-500 text-white rounded"
-            >
-              Save
-            </button> */}
-
-            <div className="flex gap-2">
-
-  {!isEditing ? (
-    <button
-      onClick={() => setIsEditing(true)}
-      className="flex-1 py-2 bg-blue-500 text-white rounded"
-    >
-      Edit ✏️
-    </button>
-  ) : (
-    <>
-      <button
-        onClick={() => {
-          saveProfile();
-          setIsEditing(false);
-        }}
-        className="flex-1 py-2 bg-green-500 text-white rounded"
-      >
-        Save ✅
-      </button>
-
-      <button
-        onClick={() => {
-          fetchTutor();
-          setIsEditing(false);
-        }}
-        className="flex-1 py-2 bg-gray-500 text-white rounded"
-      >
-        Cancel ❌
-      </button>
-    </>
-  )}
-
-  <button
-    onClick={toggleActive}
-    className="flex-1 py-2 bg-yellow-500 text-white rounded"
-  >
-    {tutor.isActive ? "Disable" : "Enable"}
-  </button>
-
-</div>
-
-            {/* <button
-              onClick={deleteTutor}
-              className="flex-1 py-2 bg-red-500 text-white rounded"
-            >
-              Delete
-            </button> */}
-            
-          </div>
+        <div className="p-4 border rounded-xl">
+          <p>Students</p>
+          <h3 className="text-xl font-bold">
+            {dashboard.totalStudents || 0}
+          </h3>
         </div>
       </div>
+    )}
 
-      {/* BOOKINGS */}
-      {dashboard && (
-        <div>
-          <h3 className="text-xl font-bold mb-3">
-            Student Bookings
-          </h3>
+    {/* PROFILE */}
+    <div className="p-5 rounded-2xl mb-6 bg-white dark:bg-gray-900 border">
+      <h3 className="text-xl font-semibold">{tutor.name}</h3>
+      <p className="text-gray-400">{tutor.subject}</p>
 
-          {dashboard.bookings.map((b) => (
-            <div key={b._id} className="p-3 mb-2 border rounded">
-              <p><b>Student:</b> {b.student?.name}</p>
-              <p><b>Email:</b> {b.student?.email}</p>
-              <p><b>Date:</b> {new Date(b.date).toLocaleDateString()}</p>
-              <p><b>Time:</b> {b.time}</p>
+      {/* AVAILABILITY */}
+      <div className="mt-3 flex flex-wrap gap-2">
+        {tutor.availability?.map((slot) => (
+          <span
+            key={slot}
+            className="px-3 py-1 bg-purple-500 text-white rounded"
+          >
+            {slot}
+          </span>
+        ))}
+      </div>
 
-            </div>
-          ))}
+      <div className="mt-4 flex gap-2">
+        <input
+          type="text"
+          placeholder="Add time"
+          value={newSlot}
+          onChange={(e) => setNewSlot(e.target.value)}
+          className="p-2 border rounded w-full dark:bg-black"
+        />
+
+        <button
+          onClick={addSlot}
+          className="px-4 bg-green-500 text-white rounded"
+        >
+          Add
+        </button>
+      </div>
+
+      {/* PRICE */}
+      <div className="mt-4">
+        <label className="block text-sm mb-1">
+          Price per hour (₹)
+        </label>
+
+        <input
+          type="number"
+          value={tutor.price || ""}
+          onChange={(e) =>
+            setTutor({ ...tutor, price: e.target.value })
+          }
+          className="w-full p-2 border rounded dark:bg-gray-800 dark:text-white"
+        />
+
+        <button
+          onClick={updateProfile}
+          className="mt-2 w-full py-2 bg-green-500 text-white rounded"
+        >
+          Update Price 💰
+        </button>
+      </div>
+
+      {/* PROFILE EDIT */}
+      <div className="mt-4 space-y-2">
+
+        <input
+          type="text"
+          placeholder="Bio"
+          value={tutor.bio || ""}
+          onChange={(e) =>
+            updateField("bio", e.target.value)
+          }
+          disabled={!isEditing}
+          className="w-full p-2 border rounded dark:bg-black"
+        />
+
+        <input
+          type="text"
+          placeholder="Experience"
+          value={tutor.experience || ""}
+          onChange={(e) =>
+            updateField("experience", e.target.value)
+          }
+          disabled={!isEditing}
+          className="w-full p-2 border rounded dark:bg-black"
+        />
+
+        <input
+          type="text"
+          placeholder="Expertise"
+          value={tutor.expertise || ""}
+          onChange={(e) =>
+            updateField("expertise", e.target.value)
+          }
+          disabled={!isEditing}
+          className="w-full p-2 border rounded dark:bg-black"
+        />
+
+        {/* BUTTONS */}
+        <div className="flex gap-2">
+
+          {/* ❌ IF DISABLED */}
+          {!tutor.isActive ? (
+            <button
+              onClick={toggleActive}
+              className="flex-1 py-2 bg-yellow-500 text-white rounded"
+            >
+              Enable 🟢
+            </button>
+          ) : (
+            <>
+              {!isEditing ? (
+                <>
+                  <button
+                    onClick={() => setIsEditing(true)}
+                    className="flex-1 py-2 bg-blue-500 text-white rounded"
+                  >
+                    Edit ✏️
+                  </button>
+
+                  <button
+                    onClick={toggleActive}
+                    className="flex-1 py-2 bg-yellow-500 text-white rounded"
+                  >
+                    Disable 🟡
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={() => {
+                      saveProfile();
+                      setIsEditing(false);
+                    }}
+                    className="flex-1 py-2 bg-green-500 text-white rounded"
+                  >
+                    Save ✅
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      fetchTutor();
+                      setIsEditing(false);
+                    }}
+                    className="flex-1 py-2 bg-gray-500 text-white rounded"
+                  >
+                    Cancel ❌
+                  </button>
+
+                  <button
+                    onClick={toggleActive}
+                    className="flex-1 py-2 bg-yellow-500 text-white rounded"
+                  >
+                    Disable 🟡
+                  </button>
+                </>
+              )}
+            </>
+          )}
+
         </div>
-      )}
 
-      {/* EARNINGS */}
-      <Link
-        to="/earnings"
-        className="inline-block mt-6 px-4 py-2 bg-green-500 text-white rounded"
-      >
-        Earnings 💰
-      </Link>
+      </div>
     </div>
-  );
-};
 
-export default TutorDashboard;
+    {/* BOOKINGS */}
+    {dashboard && (
+      <div>
+        <h3 className="text-xl font-bold mb-3">
+          Student Bookings
+        </h3>
+
+        {dashboard.bookings.map((b) => (
+          <div key={b._id} className="p-3 mb-2 border rounded">
+            <p><b>Student:</b> {b.student?.name}</p>
+            <p><b>Email:</b> {b.student?.email}</p>
+            <p><b>Date:</b> {new Date(b.date).toLocaleDateString()}</p>
+            <p><b>Time:</b> {b.time}</p>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <Link
+      to="/earnings"
+      className="inline-block mt-6 px-4 py-2 bg-green-500 text-white rounded"
+    >
+      Earnings 💰
+    </Link>
+
+  </div>
+);
