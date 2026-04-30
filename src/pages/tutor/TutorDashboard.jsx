@@ -200,7 +200,7 @@ return (
             key={slot}
             className="px-3 py-1 bg-purple-500 text-white rounded"
           >
-            {formatTime(slot)}
+            {slot}
           </span>
         ))}
       </div>
