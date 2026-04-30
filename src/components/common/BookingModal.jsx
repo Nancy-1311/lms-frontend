@@ -24,16 +24,18 @@ const handlePayment = async () => {
     return;
   }
 
-   const now = new Date();
-  const [hours, minutes] = selectedSlot.split(":");
+const now = new Date();
 
-  const selectedDateTime = new Date(selectedDate);
-  selectedDateTime.setHours(hours, minutes, 0, 0);
+// combine date + time directly
+const selectedDateTime = new Date(`${selectedDate} ${selectedSlot}`);
 
-  if (selectedDateTime < now) {
-    alert("❌ You cannot book past time");
-    return;
-  }
+console.log("NOW:", now);
+console.log("SELECTED:", selectedDateTime);
+
+if (selectedDateTime < now) {
+  alert("❌ You cannot book past time");
+  return;
+}
 
   try {
     setLoading(true); // moved here
@@ -80,22 +82,14 @@ const handlePayment = async () => {
 };
 
   const isPastTime = (date, time) => {
-  if (!date) return false;
+  if (!date || !time) return false;
 
   const now = new Date();
-  const selected = new Date(date);
 
-  // check if same day
-  if (selected.toDateString() === now.toDateString()) {
-    const [hours, minutes] = time.split(":");
+  // combine date + time safely
+  const selectedDateTime = new Date(`${date} ${time}`);
 
-    const slotTime = new Date(date);
-    slotTime.setHours(hours, minutes, 0, 0);
-
-    return slotTime < now;
-  }
-
-  return false;
+  return selectedDateTime < now;
 };
   
 
