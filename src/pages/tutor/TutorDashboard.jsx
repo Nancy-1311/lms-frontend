@@ -377,7 +377,7 @@ const TutorDashboard = () => {
       Earnings 💰
     </Link>
 
-  </div>
+ 
 );
 
 export default TutorDashboard;
