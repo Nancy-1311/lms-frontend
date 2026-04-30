@@ -11,13 +11,14 @@ const TutorDashboard = () => {
     return /^(0?[1-9]|1[0-2]):[0-5][0-9]\s?(AM|PM)$/i.test(time);
   };
 
-  const formatTime = (time) => {
+ const formatTime = (time) => {
   const [hour, minute] = time.split(":");
-  const h = Number(hour);
-  const suffix = h >= 12 ? "PM" : "AM";
-  const formattedHour = h % 12 || 12;
+  let h = parseInt(hour);
 
-  return `${formattedHour}:${minute} ${suffix}`;
+  const suffix = h >= 12 ? "PM" : "AM";
+  h = h % 12 || 12;
+
+  return `${h}:${minute} ${suffix}`;
 };
 
   const token = localStorage.getItem("token");
@@ -106,22 +107,9 @@ const TutorDashboard = () => {
     return;
   }
 
-  // convert 24h → 12h format
-  const formatTo12Hour = (time) => {
-    const [hour, minute] = time.split(":");
-    let h = parseInt(hour);
-    const suffix = h >= 12 ? "PM" : "AM";
-
-    h = h % 12 || 12;
-
-    return `${h}:${minute} ${suffix}`;
-  };
-
-  const formattedTime = formatTo12Hour(newSlot);
-
   setTutor({
     ...tutor,
-    availability: [...(tutor.availability || []), formattedTime],
+    availability: [...(tutor.availability || []), newSlot], // ✅ store raw 24h
   });
 
   setNewSlot("");
@@ -200,7 +188,7 @@ return (
             key={slot}
             className="px-3 py-1 bg-purple-500 text-white rounded"
           >
-            {slot}
+            {formatTime(slot)}
           </span>
         ))}
       </div>
