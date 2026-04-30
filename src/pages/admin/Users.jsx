@@ -106,16 +106,57 @@ const [statusFilter, setStatusFilter] = useState("");
   };
 
   const createUser = async () => {
-  try {
-    // ✅ FRONTEND VALIDATION
-    if (!name || !email || !password) {
-      alert("All fields are required ❌");
-      return;
-    }
 
+  const nameTrim = name.trim();
+  const emailTrim = email.trim().toLowerCase();
+  const passwordTrim = password.trim();
+
+  // ✅ REQUIRED
+  if (!nameTrim || !emailTrim || !passwordTrim) {
+    alert("All fields are required");
+    return;
+  }
+
+  // ✅ NAME (STRICT)
+  const nameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+  if (!nameRegex.test(nameTrim)) {
+    alert("Name must contain only letters and spaces");
+    return;
+  }
+
+  if (nameTrim.length < 2 || nameTrim.length > 50) {
+    alert("Name must be between 2 and 50 characters");
+    return;
+  }
+
+  // ✅ EMAIL
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(emailTrim)) {
+    alert("Enter a valid email");
+    return;
+  }
+
+  if (emailTrim.includes(" ")) {
+    alert("Email cannot contain spaces");
+    return;
+  }
+
+  // ✅ PASSWORD
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,20}$/;
+  if (!passwordRegex.test(passwordTrim)) {
+    alert("Password must be 6-20 characters with letters & numbers");
+    return;
+  }
+
+  try {
     await axios.post(
       "https://lms-backend-2r7y.onrender.com/api/admin/users",
-      { name, email, password, role },
+      {
+        name: nameTrim,
+        email: emailTrim,
+        password: passwordTrim,
+        role,
+      },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -123,7 +164,7 @@ const [statusFilter, setStatusFilter] = useState("");
       }
     );
 
-    alert("User created successfully ✅");
+    alert("User created ✅");
 
     setName("");
     setEmail("");
@@ -133,14 +174,10 @@ const [statusFilter, setStatusFilter] = useState("");
     fetchUsers();
 
   } catch (err) {
-    console.log("ERROR:", err.response?.data);
-  alert(err.response?.data?.message);
-
-    alert(
-      err.response?.data?.message || "Failed to create user ❌"
-    );
+    alert(err.response?.data?.message || "Error creating user");
   }
 };
+  
 
   return (
     <div>
