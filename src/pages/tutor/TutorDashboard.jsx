@@ -100,16 +100,28 @@ const TutorDashboard = () => {
     }
   };
 
-  // ADD SLOT
  const addSlot = () => {
-  if (!isValidTime(newSlot)) {
-    alert("Enter valid time (e.g. 10:00 AM)");
+  if (!newSlot) {
+    alert("Please select time");
     return;
   }
 
+  // convert 24h → 12h format
+  const formatTo12Hour = (time) => {
+    const [hour, minute] = time.split(":");
+    let h = parseInt(hour);
+    const suffix = h >= 12 ? "PM" : "AM";
+
+    h = h % 12 || 12;
+
+    return `${h}:${minute} ${suffix}`;
+  };
+
+  const formattedTime = formatTo12Hour(newSlot);
+
   setTutor({
     ...tutor,
-    availability: [...(tutor.availability || []), newSlot],
+    availability: [...(tutor.availability || []), formattedTime],
   });
 
   setNewSlot("");
