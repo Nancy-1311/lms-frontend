@@ -7,6 +7,19 @@ const TutorDashboard = () => {
   const [newSlot, setNewSlot] = useState("");
   const [isEditing, setIsEditing] = useState(false);
 
+   const isValidTime = (time) => {
+    return /^(0?[1-9]|1[0-2]):[0-5][0-9]\s?(AM|PM)$/i.test(time);
+  };
+
+  const formatTime = (time) => {
+  const [hour, minute] = time.split(":");
+  const h = Number(hour);
+  const suffix = h >= 12 ? "PM" : "AM";
+  const formattedHour = h % 12 || 12;
+
+  return `${formattedHour}:${minute} ${suffix}`;
+};
+
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -88,20 +101,19 @@ const TutorDashboard = () => {
   };
 
   // ADD SLOT
-  const addSlot = async () => {
-    const updated = [...(tutor.availability || []), newSlot];
+ const addSlot = () => {
+  if (!isValidTime(newSlot)) {
+    alert("Enter valid time (e.g. 10:00 AM)");
+    return;
+  }
 
-    await axios.put(
-      "https://lms-backend-2r7y.onrender.com/api/tutors/me",
-      { availability: updated },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+  setTutor({
+    ...tutor,
+    availability: [...(tutor.availability || []), newSlot],
+  });
 
-    setNewSlot("");
-    fetchTutor();
-  };
+  setNewSlot("");
+};
 
   // UPDATE FIELD
   const updateField = (field, value) => {
@@ -216,15 +228,17 @@ const toggleActive = async () => {
             key={slot}
             className="px-3 py-1 bg-purple-500 text-white rounded"
           >
-            {slot}
+           {formatTime(slot)}
           </span>
         ))}
       </div>
 
       <div className="mt-4 flex gap-2">
+        <label className="text-sm text-gray-400">
+  Select Time
+</label>
         <input
-          type="text"
-          placeholder="Add time"
+          type="time"
           value={newSlot}
           onChange={(e) => setNewSlot(e.target.value)}
           disabled={!isEditing}
