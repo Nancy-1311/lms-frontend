@@ -382,6 +382,5 @@ const TutorDashboard = () => {
 
   </div>
 );
-}
 
 export default TutorDashboard;
