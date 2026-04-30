@@ -380,5 +380,6 @@ return (
 
   </div>
 );
+}
 
 export default TutorDashboard;
