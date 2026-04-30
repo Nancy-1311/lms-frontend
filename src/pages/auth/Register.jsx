@@ -18,44 +18,80 @@ const Register = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
- const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
 
   const name = form.name.trim();
   const email = form.email.trim().toLowerCase();
   const password = form.password.trim();
 
-  // ✅ Required
+  // ✅ REQUIRED
   if (!name || !email || !password) {
     alert("All fields are required");
     return;
   }
 
-  // ✅ NAME (real-world safe)
-  const nameRegex = /^[A-Za-z][A-Za-z\s.'-]{1,49}$/;
+  // ✅ NAME (STRICT)
+  // Only letters, single spaces between words, no symbols, no email, no numbers
+  const nameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+
   if (!nameRegex.test(name)) {
-    alert("Enter a valid name (letters only, min 2 chars)");
+    alert("Name must contain only letters and spaces (no numbers, no email)");
     return;
   }
 
-  // ✅ EMAIL (industry standard)
+  if (name.length < 2 || name.length > 50) {
+    alert("Name must be between 2 and 50 characters");
+    return;
+  }
+
+  // ✅ EMAIL (STRICT FORMAT)
   const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+
   if (!emailRegex.test(email)) {
     alert("Enter a valid email address");
     return;
   }
 
-  // ✅ PASSWORD (strong but reasonable)
-  if (password.length < 6 || password.length > 20) {
-    alert("Password must be 6–20 characters");
+  // Extra strict: block obvious misuse
+  if (email.includes(" ")) {
+    alert("Email cannot contain spaces");
     return;
   }
 
-  const strongPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/;
-  if (!strongPass.test(password)) {
-    alert("Password must include letters and numbers");
+  // ✅ PASSWORD (STRICT)
+  // At least 6 chars, must include letter + number
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,20}$/;
+
+  if (!passwordRegex.test(password)) {
+    alert(
+      "Password must be 6-20 characters and include at least one letter and one number"
+    );
     return;
   }
+
+  try {
+    setLoading(true);
+
+    await axios.post(
+      "https://lms-backend-2r7y.onrender.com/api/auth/register",
+      {
+        name,
+        email,
+        password,
+        role: form.role,
+      }
+    );
+
+    alert("Registered Successfully ✅");
+    navigate("/login");
+
+  } catch (err) {
+    alert(err.response?.data?.message || "Error ❌");
+  } finally {
+    setLoading(false);
+  }
+};
   
 
   try {
@@ -80,6 +116,7 @@ const Register = () => {
     setLoading(false);
   }
 };
+
   return (
     <div className="flex items-center justify-center min-h-screen px-4 
     bg-gradient-to-br from-gray-100 via-blue-50 to-purple-100">
