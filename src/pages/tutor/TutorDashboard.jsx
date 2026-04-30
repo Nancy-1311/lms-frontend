@@ -128,6 +128,8 @@ const TutorDashboard = () => {
         bio: tutor.bio,
         experience: tutor.experience,
         expertise: tutor.expertise,
+         availability: tutor.availability, 
+      price: tutor.price, 
       },
       {
         headers: { Authorization: `Bearer ${token}` },
