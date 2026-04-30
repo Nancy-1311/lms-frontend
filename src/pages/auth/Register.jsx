@@ -25,13 +25,13 @@ const handleSubmit = async (e) => {
   const email = form.email.trim().toLowerCase();
   const password = form.password.trim();
 
-  // ✅ REQUIRED
+  // REQUIRED
   if (!name || !email || !password) {
     alert("All fields are required");
     return;
   }
 
-  // ✅ NAME (STRICT)
+  // NAME
   // Only letters, single spaces between words, no symbols, no email, no numbers
   const nameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
 
@@ -45,7 +45,7 @@ const handleSubmit = async (e) => {
     return;
   }
 
-  // ✅ EMAIL (STRICT FORMAT)
+  // EMAIL
   const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
 
   if (!emailRegex.test(email)) {
@@ -53,13 +53,12 @@ const handleSubmit = async (e) => {
     return;
   }
 
-  // Extra strict: block obvious misuse
   if (email.includes(" ")) {
     alert("Email cannot contain spaces");
     return;
   }
 
-  // ✅ PASSWORD (STRICT)
+  // PASSWORD 
   // At least 6 chars, must include letter + number
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,20}$/;
 
@@ -93,9 +92,6 @@ const handleSubmit = async (e) => {
   }
 };
   
-
- 
-
   return (
     <div className="flex items-center justify-center min-h-screen px-4 
     bg-gradient-to-br from-gray-100 via-blue-50 to-purple-100">
