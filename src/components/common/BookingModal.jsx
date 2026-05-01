@@ -128,7 +128,6 @@ if (selectedDateTime < now) {
         <input
           type="date"
           value={selectedDate}
-          {/* min={new Date().toISOString().split("T")[0]} */}
           onChange={(e) => setSelectedDate(e.target.value)}
           className="w-full mb-4 p-2 rounded-lg border 
           dark:bg-gray-700 dark:text-white"
