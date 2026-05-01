@@ -373,7 +373,7 @@ const [statusFilter, setStatusFilter] = useState("");
                     ) : (
                       <span className="text-gray-400 text-sm">You</span>
                     )}
-
+                    }
                   </div>
                 </td>
 
