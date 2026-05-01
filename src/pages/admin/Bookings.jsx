@@ -8,6 +8,24 @@ const [statusFilter, setStatusFilter] = useState("");
 
   const token = localStorage.getItem("token");
 
+  const formatTime = (time) => {
+  if (!time) return "";
+
+  if (time.toLowerCase().includes("am") || time.toLowerCase().includes("pm")) {
+    return time;
+  }
+
+  const [hours, minutes] = time.split(":");
+  let h = parseInt(hours);
+
+  const ampm = h >= 12 ? "PM" : "AM";
+
+  h = h % 12;
+  if (h === 0) h = 12;
+
+  return `${h}:${minutes} ${ampm}`;
+};
+  
   const fetchBookings = async () => {
     try {
       const res = await axios.get(
@@ -148,7 +166,7 @@ const [statusFilter, setStatusFilter] = useState("");
           {new Date(b.date).toLocaleDateString()}
         </td>
 
-        <td className="p-3">{b.time}</td>
+        <td className="p-3">{formatTime(b.time)}</td>
 
         <td className="p-3 font-semibold">
           ₹{b.price}
