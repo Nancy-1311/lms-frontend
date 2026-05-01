@@ -7,6 +7,20 @@ const BookingModal = ({ tutor, onClose }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const formatTime = (time) => {
+  if (time.includes("AM") || time.includes("PM")) {
+    return time;
+  }
+
+  const [hour, minute] = time.split(":");
+  let h = parseInt(hour);
+
+  const suffix = h >= 12 ? "PM" : "AM";
+  h = h % 12 || 12;
+
+  return `${h}:${minute} ${suffix}`;
+};
+
 
 const handlePayment = async () => {
   if (!selectedSlot || !selectedDate) {
@@ -140,7 +154,7 @@ if (selectedDateTime < now) {
       : "border-gray-300 dark:border-gray-600 hover:bg-purple-500 hover:text-white"
   }`}
 >
-  {slot}
+   {formatTime(slot)}
 </button>
               // <button
               //   key={slot}
