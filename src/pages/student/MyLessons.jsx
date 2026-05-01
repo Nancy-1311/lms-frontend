@@ -61,7 +61,8 @@ const MyLessons = () => {
     window.open(booking.meetingLink, "_blank");
   };
 
-  const cancelBooking = async (id) => {
+const cancelBooking = async (id) => {
+  try {
     await axios.delete(
       `https://lms-backend-2r7y.onrender.com/api/bookings/${id}`,
       {
@@ -70,8 +71,14 @@ const MyLessons = () => {
         },
       }
     );
-    setBookings(bookings.filter((b) => b._id !== id));
-  };
+
+    // ✅ REFRESH FROM SERVER (correct way)
+    fetchBookings();
+
+  } catch (err) {
+    alert("Cancel failed ❌");
+  }
+};
 
   const reschedule = async (id) => {
     try {
@@ -191,11 +198,15 @@ return (
             typeof b.tutor === "object" ? b.tutor._id : b.tutor;
 
           const now = new Date();
+
           const [hours, minutes] = b.time.split(":");
-const classDateTime = new Date(b.date);
-classDateTime.setHours(parseInt(hours));
-classDateTime.setMinutes(parseInt(minutes));
+          const classDateTime = new Date(b.date);
+          classDateTime.setHours(parseInt(hours));
+          classDateTime.setMinutes(parseInt(minutes));
+
           const isCompleted = b.recordingUrl;
+          const isCancelled = b.isCancelled;
+          const isPast = classDateTime < now;
 
           return (
             <div key={b._id} className="p-5 rounded-2xl border">
@@ -205,6 +216,13 @@ classDateTime.setMinutes(parseInt(minutes));
               <p className="text-purple-500 mt-2">
                 {new Date(b.date).toLocaleDateString()} | {b.time}
               </p>
+
+              {/* ✅ Cancelled Label */}
+              {isCancelled && (
+                <p className="text-red-500 font-bold mt-2">
+                  Cancelled ❌
+                </p>
+              )}
 
               <div className="mt-3 space-y-2">
 
@@ -220,7 +238,12 @@ classDateTime.setMinutes(parseInt(minutes));
                     {/* JOIN */}
                     <button
                       onClick={() => joinClass(b)}
-                      className="w-full py-2 bg-green-500 text-white rounded"
+                      disabled={isCancelled || isPast}
+                      className={`w-full py-2 rounded ${
+                        isCancelled || isPast
+                          ? "bg-gray-400 cursor-not-allowed"
+                          : "bg-green-500 text-white"
+                      }`}
                     >
                       Join Class 🎥
                     </button>
@@ -228,9 +251,14 @@ classDateTime.setMinutes(parseInt(minutes));
                     {/* CANCEL */}
                     <button
                       onClick={() => cancelBooking(b._id)}
-                      className="w-full py-2 bg-red-500 text-white rounded"
+                      disabled={isCancelled || isPast}
+                      className={`w-full py-2 rounded ${
+                        isCancelled || isPast
+                          ? "bg-gray-400 cursor-not-allowed"
+                          : "bg-red-500 text-white"
+                      }`}
                     >
-                      Cancel Booking ❌
+                      {isCancelled ? "Cancelled ❌" : "Cancel Booking ❌"}
                     </button>
 
                     {user?.role === "student" && (
@@ -244,6 +272,7 @@ classDateTime.setMinutes(parseInt(minutes));
                               [b._id]: e.target.value,
                             })
                           }
+                          disabled={isCancelled || isPast}
                         >
                           <option value="">Select New Time</option>
                           <option value="10:00 AM">10:00 AM</option>
@@ -253,7 +282,12 @@ classDateTime.setMinutes(parseInt(minutes));
 
                         <button
                           onClick={() => reschedule(b._id)}
-                          className="w-full py-2 bg-indigo-500 text-white rounded"
+                          disabled={isCancelled || isPast}
+                          className={`w-full py-2 rounded ${
+                            isCancelled || isPast
+                              ? "bg-gray-400 cursor-not-allowed"
+                              : "bg-indigo-500 text-white"
+                          }`}
                         >
                           Reschedule 🔄
                         </button>
@@ -324,7 +358,6 @@ classDateTime.setMinutes(parseInt(minutes));
     </div>
   </div>
 );
-};
 
 export default MyLessons;
 
