@@ -334,7 +334,7 @@ const [statusFilter, setStatusFilter] = useState("");
                 <td className="p-4">
                   <div className="flex flex-wrap gap-2">
 
-                    {user._id !== currentUser?._id ? (
+                    {user.email !== currentUser?.email (
                       <>
                         <button
                           onClick={() => toggleStatus(user._id)}
