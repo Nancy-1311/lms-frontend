@@ -11,9 +11,9 @@ const TutorDashboard = () => {
     return /^(0?[1-9]|1[0-2]):[0-5][0-9]\s?(AM|PM)$/i.test(time);
   };
 
-  const formatTime = (time) => {
+ const formatTime = (time) => {
   if (time.includes("AM") || time.includes("PM")) {
-    return time; // already formatted
+    return time;
   }
 
   const [hour, minute] = time.split(":");
