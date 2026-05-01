@@ -358,6 +358,7 @@ return (
     </div>
   </div>
 );
+}
 
 export default MyLessons;
 
