@@ -337,14 +337,14 @@ const [statusFilter, setStatusFilter] = useState("");
                     {user.email !== currentUser?.email (
                       <>
                         <button
-                          onClick={() => toggleStatus(user._id)}
+                          onClick={() => toggleStatus(user.email)}
                           className="px-3 py-1 bg-yellow-500 text-white rounded"
                         >
                           Toggle
                         </button>
 
                         <button
-                          onClick={() => deleteUser(user._id)}
+                          onClick={() => deleteUser(user.email)}
                           className="px-3 py-1 bg-red-600 text-white rounded"
                         >
                           Delete
