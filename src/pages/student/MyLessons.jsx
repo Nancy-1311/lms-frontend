@@ -131,7 +131,7 @@ const cancelBooking = async (id) => {
           ? booking.tutor._id
           : booking.tutor;
 
-      const data = reviewData[tutorId];
+      const data = reviewData[booking._id];
 
       console.log("TutorId:", tutorId);
       console.log("Review Data:", data);
@@ -156,6 +156,7 @@ const cancelBooking = async (id) => {
       await axios.post(
         "https://lms-backend-2r7y.onrender.com/api/reviews",
         {
+           bookingId: booking._id,
           tutorId,
           rating,
           comment: data.comment || "",
@@ -337,7 +338,7 @@ return (
                           onChange={(e) =>
                             setReviewData((prev) => ({
                               ...prev,
-                              [tutorId]: {
+                              [b._id]: {
                                 ...prev[tutorId],
                                 rating: e.target.value,
                               },
@@ -352,7 +353,7 @@ return (
                           onChange={(e) =>
                             setReviewData((prev) => ({
                               ...prev,
-                              [tutorId]: {
+                              [b._id]: {
                                 ...prev[tutorId],
                                 comment: e.target.value,
                               },
