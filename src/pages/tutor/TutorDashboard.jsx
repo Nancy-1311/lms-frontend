@@ -214,7 +214,7 @@ return (
         <button
           onClick={addSlot}
           disabled={!isEditing}
-          className="px-4 py-4 bg-green-500 text-white rounded"
+          className="px-4 py-2 bg-green-500 text-white rounded"
         >
           Add
         </button>
